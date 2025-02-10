@@ -32,13 +32,14 @@ function App() {
       Failed to load balance sheet, please try again in few minutes.
     </Alert>
   }
+  
   return (
     <Box
       sx={{
         width: '100%',
         maxWidth: 800,
-        margin: '0 auto',  // Centers the box horizontally
-        padding: 2,          // Optional: for padding inside the box
+        margin: '0 auto',
+        padding: 2,
       }}
     >
       <>
@@ -48,8 +49,13 @@ function App() {
             justifyContent: "center",
             alignItems: "center",
           }} size={{ md: 4 }} direction={'column'}>
+            {/* Loading progress when loading balance sheet */}
             {isLoading && <CircularProgress />}
+
+            {/* Show error banner on Load balance sheet failed */}
             {showError && renderError()}
+
+            {/* Render Report Title on Balance sheet loaded */}
             {!isLoading &&<>
               <Typography variant='h4'>{balanceSheetData.reportTitle[0]}</Typography>
               <br/>
@@ -62,6 +68,8 @@ function App() {
       </>
       <>
         <Grid spacing={2} direction="row" sx={{maxHeight: "30vh"}}>
+          
+          {/* Render balance sheet into table on balance sheet loading complete */}
           {!isLoading && <BalanceTable headerArray={balanceSheetData.headerArray} rowArray={balanceSheetData.rowArray} />}
         </Grid>
       </>
